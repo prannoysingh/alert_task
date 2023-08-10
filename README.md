@@ -1,1 +1,29 @@
 # alert_task
+
+This repo contains a short task related to video security. The idea is that this is a simplified version of a video security system. There is a database which stores information about object detections. There is also a "backend" which writes to the database and queries it. The backend in this case are simple python functions.
+
+The only prerequisites should be [docker](https://docs.docker.com/engine/install/) and [docker-compose](https://docs.docker.com/compose/install/).
+
+To run the code use `./run.sh`
+
+
+## Tasks
+
+### Ingestion
+To start off, please complete the `ingest_data` function - feel free to change the signature if you want to. Please also consider the implications of the code - performance, maintenance, etc.  
+The detections have a timestamp and a type property. The type will always be one of a set of pre-defined strings - "pedestrian", "bicycle", "car", "truck", "van".
+
+
+### Aggregation
+We'd like to show our user an overview of the detections. To do that please complete the "aggregate_detections" function, so that it returns **two lists of periods of activity**. One should contain the activity of people who were detected (the "pedestrian" and "bicycle" detection types) and the other should contain the activity of vehicles (the "car", "truck" and "van" detection types).
+The goal is to aggregate the detections in the database into periods of activity in each category. Any detections less than 1 minute apart in the same category should be combined into an interval.
+
+For example if we assume that the system has detected cars at the following timestamps: 18:30:30, 18:31:00, 18:31:30, 18:35:00, 18:35:30, 18:36:00, 18:37:30, 18:38:00. The aggregate function should return three periods of activity: 18:30:30-18:31:30, 18:35:00-18:36:00 and 18:37:30-18:38:00.
+
+Please consider the performance of the function you write - how would it work with millions of data points. We'd encourage you to keep as much of the logic in the database query.
+
+
+### Alerts
+The last part is related to real-time alerts for unusual events. Our users would like to be notified if a person is detected for a continued period of time. Imagine that the ingestion function is called real-time as the detections happen every 30 seconds.
+
+Please add additional logic which will print to the console if a person is detected in 5 consecutive intervals.
