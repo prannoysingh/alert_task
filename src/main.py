@@ -34,12 +34,24 @@ def aggregate_detections(conn: sa.Connection) -> dict[str, list[tuple[str, str]]
 def main():
     conn = database_connection()
 
-    ingest_data(conn, "2023-08-10T10:00:00", "car")
+    # Simulate real-time detections every 30 seconds
+    detections = [
+        ("2023-08-10T18:30:30", "pedestrian"),
+        ("2023-08-10T18:31:00", "pedestrian"),
+        ("2023-08-10T18:31:00", "car"),
+        ("2023-08-10T18:31:30", "pedestrian"),
+        ("2023-08-10T18:35:00", "pedestrian"),
+        ("2023-08-10T18:35:30", "pedestrian"),
+        ("2023-08-10T18:36:00", "pedestrian"),
+        ("2023-08-10T18:37:00", "pedestrian"),
+        ("2023-08-10T18:37:30", "pedestrian"),
+    ]
 
-    detections = aggregate_detections(conn)
+    for timestamp, detection_type in detections:
+        ingest_data(conn, timestamp, detection_type)
 
-    print(detections["people"])
-    print(detections["vehicles"])
+    aggregate_results = aggregate_detections(conn)
+    print(aggregate_results)
 
 
 if __name__ == "__main__":
