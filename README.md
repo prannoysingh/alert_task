@@ -1,13 +1,20 @@
-# alert_task
+# Video events management task
 
-This repo contains a short task related to video security. The idea is that this is a simplified version of a video security system. There is a database which stores information about object detections. There is also a "backend" which writes to the database and queries it. The backend in this case are simple python functions.
+This repo contains a short interview coding task at Coram.AI
 
-The only prerequisites should be [docker](https://docs.docker.com/engine/install/) and [docker-compose](https://docs.docker.com/compose/install/).
+You are asked to implement backend APIs of a video event management system supporting basic operations of:
+1. Ingestion of new video events.
+2. Aggregation of recorded video events.
+3. Alert triggered on unusual activity.
 
-To run the code use `./run.sh`
+The events are stored in postgres database the backend interacts with.
 
+## Setup
+1. Install [docker](https://docs.docker.com/engine/install/) and [docker-compose](https://docs.docker.com/compose/install/)
+2. Run the code using `./run.sh`. This script starts the database and runs implemented APIs.
 
 ## Tasks
+All tasks should be implemented within `main.py` file:
 
 ### Ingestion
 To start off, please complete the `ingest_data` function - feel free to change the signature if you want to. Please also consider the implications of the code - performance, maintenance, etc.  
