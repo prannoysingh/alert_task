@@ -85,31 +85,6 @@ def ingest_data(session, DetectionClass, timestamp: datetime, detection_type: st
         if intervals_are_consecutive:
             print("\033[91m ALERT: A person has been detected in 5 consecutive intervals. \033[0m")
 
-
-# def ingest_data(session, DetectionClass, timestamp: datetime, detection_type: str):
-#     """
-#     Ingest new data (timestamp and detection type) into the database and prints alerts based on data conditions.
-    
-#     :param session: SQLAlchemy session instance.
-#     :param DetectionClass: The database model/class used to store detections.
-#     :param timestamp: DateTime object representing the time of detection.
-#     :param detection_type: String indicating the type of detection (e.g. 'pedestrian', 'bicycle').
-#     """
-#     detection = DetectionClass(time=timestamp, type=detection_type)
-#     session.add(detection)
-
-#     # Set the type conditions
-#     type_conditions = DetectionClass.type.in_(['pedestrian', 'bicycle'])
-
-#     # Set the time condition
-#     time_condition = DetectionClass.time <= timestamp
-
-#     # Query, filter, and count
-#     count = session.query(DetectionClass).filter(type_conditions, time_condition).count()
-#     print(f"Count: {count}")
-#     if count % 5 == 0:
-#         print("\033[91m ALERT: A person has been detected in 5 consecutive intervals. \033[0m")
-
 def group_timestamps(session, DetectionClass, types: tuple) -> list:
     """
     Groups timestamps based on a given type and returns intervals when detections of that type occurred.
