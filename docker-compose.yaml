@@ -5,6 +5,12 @@ services:
     build:
       context: ./src
       dockerfile: ./backend.Dockerfile
+    volumes:
+      - ./src/:/usr/src/app/
+    depends_on:
+      - postgres
+    env_file:
+      - .env
   postgres:
     image: postgres:13.7-alpine
     ports:

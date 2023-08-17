@@ -1,2 +1,5 @@
 sqlalchemy == 2.0.1
 psycopg2 == 2.9.7
+pytest==6.2.5
+pytest-mock==3.11.1
+coverage==7.3.0
